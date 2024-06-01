@@ -1,0 +1,160 @@
+<div class="card">
+    <p-tabView [scrollable]="true">
+        <p-tabPanel header="Categorize your Network">
+            
+            <div class="formgrid grid p-4" *ngIf="numberOfCategories < maxNumberOfCategories" >
+                <div class="field col-12 md:col-6">
+                    <label for="categoryName">Category Name</label>
+                    <input id="categoryName" maxlength="150" [(ngModel)]="categoryName" type="text" pInputText class="w-full">
+                </div>
+                
+                <div class="field col-12 md:col-6">
+                    <label for="categoryDesc">Category Description</label>
+                    <textarea id="categoryDesc" maxlength="200" [(ngModel)]="categoryDesc" type="text" pInputText class="w-full"></textarea>
+                </div>
+            
+                <div class="field col-12">
+                    <label for="borderColor">Choose Border Color</label>
+                    <p-colorPicker [inline]="true" [(ngModel)]="selectedColor" class="w-full mb-3"></p-colorPicker>
+                </div>
+            </div>
+            <div *ngIf="numberOfCategories == maxNumberOfCategories">
+                <div class="limit-alert bg-gradient-primary">
+                    <div class="title text-light">Limit Alert</div>
+                    <div class="message text-light">You have reached your limit for this feature.</div>
+                  </div>                              
+            </div>
+            <div class="formgrid grid p-4">
+                <div class="field col-12 md:col-2">
+                    <p-button styleClass="p-button-primary" label="Save" icon="pi pi-check" (click)="saveCategory()" [style]="{'minWidth':'100%'}"></p-button>
+                </div>
+            
+                <div class="field col-12 md:col-2">
+                    <p-button styleClass="p-button-help" label="Initialize" icon="pi pi-refresh" (click)="initializeForm()" [style]="{'minWidth':'100%'}"></p-button>
+                </div>
+            </div>
+            
+
+            
+            <div class=" mt-2">
+                <div class="grid">
+            
+                    <div class="col-12 md:col-6 lg:col-4" *ngFor="let item of categories" >
+                        <div class="surface-card shadow-2 p-3 border-round" [ngStyle]="item?.BorderColor ? {'border-left': '4px solid ' + item?.BorderColor} : {}">
+                            <div class="flex justify-content-between mb-3">
+                                <div>
+                                    <span class="block text-900 font-medium mb-3">{{ item?.Name }}</span>
+                                    <div class="text-500 font-medium text-xs">
+                                       {{ item?.Description }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <!-- Edit and Delete buttons -->
+                                <div class="flex align-items-center justify-content-center bg-red-100 border-round" style="width:2rem;height:2rem;cursor: pointer;">
+                                    <i class="pi pi-trash text-red-500 text-base"></i>
+                                </div>
+                                <div (click)="editCategory(item)" class="flex align-items-center justify-content-center bg-yellow-100 border-round" style="width:2rem;height:2rem;cursor: pointer;">
+                                    <i class="pi pi-pencil text-yellow-500 text-base"></i>
+                                </div>
+                                <div class="flex align-items-center justify-content-center bg-purple-100 border-round" pTooltip="Show Details" style="width:2rem;height:2rem;cursor: pointer;">
+                                    <i class="pi pi-external-link text-purple-500 text-base"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+
+
+        </p-tabPanel>
+        <p-tabPanel header="Manage Your Network">
+            <!-- Form to Add a New Connection -->
+            <div class="formgrid grid p-4" *ngIf="numberOfContacts < maxNumberOfContacts">
+                <div class="field col-12 md:col-4">
+                    <label for="contactName">Name</label>
+                    <input id="contactName" type="text" pInputText class="w-full" [(ngModel)]="contactName" name="contactName">
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label for="contactEmail">Email</label>
+                    <input id="contactEmail" type="email" pInputText class="w-full" [(ngModel)]="contactEmail" name="contactEmail">
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label for="contactCompany">Phone</label>
+                    <input id="contactCompany" type="text" pInputText class="w-full" [(ngModel)]="contactPhone" name="contactCompany">
+                </div>
+                <div class="field col-12 flex flex-column">
+                    <label for="contactCategory">Category</label>
+                    <!-- Dropdown menu for selecting contact categories -->
+                    <p-dropdown [style]="{'minWidth':'100%'}" id="contactCategory" [filter]="true" [options]="categories" optionLabel="Name" placeholder="Select Category" class="w-full" [(ngModel)]="selectedCategory" name="selectedCategory"></p-dropdown>
+                </div>
+            
+                <div class="formgrid grid col-12">
+                    <div class="field col-12 md:col-2">
+                        <p-button styleClass="p-button-success" label="Save" icon="pi pi-plus" (click)="saveContact()" [style]="{'minWidth':'100%'}"></p-button>
+                    </div>
+
+                    <div class="field col-12 md:col-2">
+                        <p-button styleClass="p-button-primary" label="Search" icon="pi pi-search" [style]="{'minWidth':'100%'}"></p-button>
+                    </div>
+                
+                    <div class="field col-12 md:col-2">
+                        <p-button (click)="initializeContact()" styleClass="p-button-help" label="Initialize" icon="pi pi-refresh" [style]="{'minWidth':'100%'}"></p-button>
+                    </div>
+                </div>
+                
+            </div>
+            <div *ngIf="numberOfContacts == maxNumberOfContacts">
+                <div class="limit-alert bg-gradient-primary">
+                    <div class="title text-light">Limit Alert</div>
+                    <div class="message text-light">You have reached your limit for this feature.</div>
+                  </div>                              
+            </div>
+
+<!-- Display Cards for Existing Connections -->
+<div class=" mt-2">
+    <div class="grid p-4">
+        <!-- Card displaying basic information of each connection -->
+        <div class="col-12 md:col-6 lg:col-4" *ngFor="let item of contacts" >
+            <div class="surface-card shadow-2 p-3 border-round" 
+     style="position: relative;" 
+     [ngStyle]="{ 'border-left': '4px solid ' + (item?.CategoryBorderColor || 'transparent') }">
+                <div class="flex justify-content-between mb-3">
+                    <div class="w-full" >
+
+                        <div class="w-full flex justify-content-center mb-2" >
+                            <div style="width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background-color: #eee;" >
+                                <svg data-icon-name="user-9" data-style="line" icon_origin_id="24299" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="user-9" class="icon line" width="48" height="48"><circle style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1;" r="6" cy="9" cx="12" id="primary"></circle><path style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1;" d="M7.46,13.26A5,5,0,0,0,4,18v1s2,2,8,2,8-2,8-2V18a5,5,0,0,0-3.51-4.75" data-name="primary" id="primary-2"></path></svg>                            </div>
+                        </div>
+
+                        <span class="block text-900 font-medium text-xl mb-3 text-center">{{ item?.ContactName }}</span>
+                        <div class="text-500 font-medium text-basic text-center">
+                            {{ item?.ContactEmail ? item.ContactEmail : '--' }}
+                          </div>
+                          <div class="text-500 font-medium text-basic text-center">
+                            {{ item?.ContactPhone ? item.ContactPhone : '--' }}
+                          </div>                          
+                        <div class=" category-badge text-500 font-medium text-basic text-center">{{ item?.CategoryName }}</div>
+                    </div>
+                </div>
+                <div class="flex justify-content-center gap-2">
+                    <!-- Edit and Delete buttons -->
+                    <div class="flex align-items-center justify-content-center bg-red-100 border-round" style="width:2rem;height:2rem;cursor: pointer;">
+                        <i class="pi pi-trash text-red-500 text-base"></i>
+                    </div>  
+                    <div (click)="editContact(item)" class="flex align-items-center justify-content-center bg-yellow-100 border-round" style="width:2rem;height:2rem;cursor: pointer;">
+                        <i class="pi pi-pencil text-yellow-500 text-base"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Repeat this card structure for each existing connection -->
+    </div>
+</div>
+
+        </p-tabPanel>
+    </p-tabView>
+</div>

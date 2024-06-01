@@ -1,0 +1,95 @@
+<div class="surface-card p-4 shadow-2 border-round">
+    <div class="text-3xl font-medium text-900 mb-3">Manage Your Social Media Accounts</div>
+    <div class="font-medium text-500 mb-3">Please provide the following information to manage your social media
+        accounts:</div>
+    <div class="border-2 border-dashed surface-border">
+
+        <div class="formgrid grid p-4">
+            <div class="field col-12 md:col-4">
+                <label for="accountName">Account Name<span class="required">*</span></label>
+                <input id="accountName" type="text" pInputText class="w-full" [(ngModel)]="accountName" required>
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="accountLink">Account Link<span class="required">*</span></label>
+                <input id="accountLink" type="text" pInputText class="w-full" [(ngModel)]="accountLink" required>
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="platform">Platform<span class="required">*</span></label>
+                <p-dropdown [style]="{'minWidth':'100%'}" [options]="platforms" [filter]="true" filterBy="label" [(ngModel)]="selectedPlatform" optionLabel="label" [showClear]="true"
+                    placeholder="Select a Platform">
+                    <ng-template pTemplate="selectedItem">
+                        <div class="flex align-items-center gap-2" *ngIf="selectedPlatform">
+                            <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                                [class]="'flag flag-' + selectedPlatform.value.toLowerCase()" style="width: 18px" />
+                            <div>{{ selectedPlatform.label }}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-platform pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                            <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                                [class]="'flag flag-' + platform.value.toLowerCase()" style="width: 18px" />
+                            <div>{{ platform.label }}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="formgrid grid p-4 flex align-items-center justify-content-center">
+        <div class="field col-12 md:col-2">
+            <p-button label="Save" icon="pi pi-check" [style]="{'minWidth':'100%'}" (click)="saveSocialMediaAccount()"></p-button>
+        </div>
+
+        <div (click)="initializeForm()" class="field col-12 md:col-2">
+            <p-button label="Initialize" icon="pi pi-refresh" severity="help" [style]="{'minWidth':'100%'}" (click)="initializeForm()"></p-button>
+        </div>
+
+        <div (click)="cancel()" class="field col-12 md:col-2">
+            <p-button label="Cancel" icon="pi pi-backward" severity="secondary" [style]="{'minWidth':'100%'}" (click)="cancel()"></p-button>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="px-4 py-5">
+    <div class="grid">
+        
+        <div class="col-12 md:col-6 lg:col-3" *ngFor="let item of accounts" >
+            <!-- Facebook Card -->
+            <div class="surface-card shadow-2 p-3 border-round bg-facebook">
+                <div class="flex justify-content-between mb-3">
+                    <div [ngClass]="'flex align-items-center justify-content-center  bg-' + item?.platform?.toLowerCase() + '-icon border-round'" style="width:4.5rem;height:4.5rem">
+                        <i [ngClass]="'pi pi-' + item?.platform?.toLowerCase() + ' text-white text-5xl'"></i>
+                    </div>                    
+                    <div>
+                        <span class="block text-500 font-medium mb-3">{{ item?.platform }}</span>
+                        <!-- <div class="text-900 font-medium text-xl">152</div> -->
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <span class="text-gray-600">Username: {{ item?.account_name }}</span>
+                </div>
+                <div class="mt-4" style="    background: #3B82F6;
+                padding: 13px;
+                text-align: center;
+                text-decoration: none;">
+                    <a [href]="item?.account_url" class="btn btn-sm btn-primary" target="_blank" style="text-decoration: none;
+                    color: #FFF;">Go to Profile</a>
+                </div>
+                <div class="flex justify-content-center gap-3 mb-3 mt-3">
+                    <div (click)="editAccount(item)" class="flex align-items-center justify-content-center bg-yellow-100 border-round mt-2" pTooltip="Edit Account Infos" style="width:2.5rem;height:2.5rem; cursor: pointer;">
+                        <i class="pi pi-pencil text-yellow-500 text-xl"></i>
+                    </div>
+                    <div (click)="deleteSocialMediaAccount(item?.id)" class="flex align-items-center justify-content-center bg-red-100 border-round mt-2" pTooltip="Delete the account" style="width:2.5rem;height:2.5rem; cursor: pointer;">
+                        <i class="pi pi-trash text-red-500 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="card">
+    <p-menubar [model]="items">
+        <ng-template pTemplate="start">
+            <img src="https://i.ibb.co/nfMhRY8/rsz-removalai-119b8a02-f1ae-45f3-93a0-d48f45378fce-ib0yorbbtpuqodrjqdylyg-d1thb6.png" width="100px" />
+        </ng-template>
+        <ng-template pTemplate="item" let-item let-root="root">
+            <a pRipple class="flex align-items-center p-menuitem-link">
+                <span [class]="item.icon"></span>
+                <span class="ml-2">{{ item.label }}</span>
+                <span *ngIf="item.shortcut" class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{{ item.shortcut }}</span>
+                <i *ngIf="item.items" [ngClass]="['pi', root ? 'pi-angle-down ml-2' : 'pi-angle-right ml-auto']"></i>
+            </a>
+        </ng-template>
+        <ng-template pTemplate="end">
+            <div class="flex align-items-center gap-2">
+                <!-- <input type="text" pInputText placeholder="Search" class="w-10rem sm:w-auto" /> -->
+                <p-avatar (click)="op?.toggle($event)" size="large" image="https://img.icons8.com/?size=256&id=ckaioC1qqwCu&format=png" shape="circle" />
+                <!-- <p-button (click)="op?.toggle($event)" icon="pi pi-share-alt" label="Share" /> -->
+                <p-overlayPanel #op>
+                    <div class="flex flex-column gap-3 w-25rem">
+                        <div class="profile_menu_item">
+                            <span routerLink="/companies/user-profile" style="cursor: pointer;" class="font-medium block">User Profile</span>
+                            <!-- Placeholder content for user profile -->
+                            <!-- You can add profile details here -->
+                        </div>
+                        <div class="profile_menu_item" style="display: none;">
+                            <span class="font-medium block">Settings</span>
+                            <!-- Placeholder content for settings -->
+                            <!-- You can add various settings options here -->
+                        </div>
+                        <div class="profile_menu_item" style="display: none;">
+                            <span class="font-medium block">Subscription Plan</span>
+                            <!-- Placeholder content for subscription plan -->
+                            <!-- You can display subscription details and options here -->
+                        </div>
+                        <div>
+                            <p-button (click)="logout()" [outlined]="true" severity="danger" label="Logout" icon="pi pi-power-off"></p-button>
+                        </div>
+                    </div>
+                </p-overlayPanel>
+                
+            </div>
+        </ng-template>
+    </p-menubar>
+</div>

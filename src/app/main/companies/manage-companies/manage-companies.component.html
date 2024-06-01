@@ -1,0 +1,53 @@
+<div class="surface-card p-4 shadow-2 border-round">
+    <div class="text-3xl font-medium text-900 mb-3">Add Company</div>
+    <div class="font-medium text-500 mb-3">Please fill out the following details to add a new company.</div>
+    <div style="" class="border-2 border-dashed surface-border">
+    
+        <div class="formgrid grid p-4">
+            <div class="field col-12 md:col-6">
+                <label for="companyName">Company Name<span class="required">*</span></label>
+                <input id="companyName" type="text" pInputText class="w-full" [(ngModel)]="companyName" required>
+            </div>
+            <div class="field col-12 md:col-6">
+                <label for="industry">Industry<span class="required">*</span></label>
+                <input id="industry" type="text" pInputText class="w-full" [(ngModel)]="industry" required>
+            </div>
+            <div class="field col-12">
+                <label for="location">Location<span class="required">*</span></label>
+                <input id="location" type="text" pInputText class="w-full" [(ngModel)]="location" required>
+            </div>
+            <div class="field col-12 md:col-6">
+                <label for="foundedYear">Founded Year<span class="required">*</span></label>
+                <p-inputNumber  id="foundedYear" type="number" [style]="{'minWidth':'100%'}" class="w-full" [(ngModel)]="foundedYear" required></p-inputNumber>
+            </div>
+            <div class="field col-12 md:col-6">
+                <label for="size">Company Size<span class="required">*</span></label>
+                <p-dropdown id="size" [options]="companySizeOptions" [style]="{'minWidth':'100%'}" placeholder="Select company size" [(ngModel)]="companySize" required></p-dropdown>
+            </div>
+            <div class="field col-12">
+                <label for="description">Description<span class="required">*</span></label>
+                <textarea id="description" rows="4" pInputTextarea class="w-full" [(ngModel)]="description" required></textarea>
+            </div>
+            <div class="field col-12 md:col-6">
+                <label for="contactEmail">Contact Email<span class="required">*</span></label>
+                <input id="contactEmail" type="email" pInputText class="w-full" [(ngModel)]="contactEmail" required>
+            </div>
+        </div>
+    
+    </div>
+    
+    <div class="formgrid grid p-4 flex align-items-center justify-content-center">
+        <div class="field col-12 md:col-2">
+            <p-button label="Save" icon="pi pi-check" [style]="{'minWidth':'100%'}" (click)="saveCompany()"></p-button>
+        </div>
+
+        <div class="field col-12 md:col-2">
+            <p-button label="Initilize" icon="pi pi-refresh" severity="help" [style]="{'minWidth':'100%'}" (click)="Initilize()" ></p-button>
+        </div>
+
+        <div class="field col-12 md:col-2">
+            <p-button label="Cancel" icon="pi pi-backward" (click)="cancel()" severity="secondary" [style]="{'minWidth':'100%'}" (click)="Initilize()" ></p-button>
+        </div>
+    </div>
+
+</div>

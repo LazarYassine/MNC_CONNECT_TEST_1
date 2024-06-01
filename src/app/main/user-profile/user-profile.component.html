@@ -1,0 +1,39 @@
+<div class="grid px-4 mt-4">
+    <div class="col-12 lg:col-4">
+        <div class="card mb-4 mb-xl-0">
+            <div class="card-header bg-gray-900 text-white">Profile Picture</div>
+            <div class="card-body text-center bg-blue-50">
+                <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                <button class="btn btn-primary" type="button">Upload new image</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 lg:col-8">
+        <div class="card mb-4">
+            <div class="card-header bg-gray-900 text-white">Account Details</div>
+            <div class="card-body bg-blue-50">
+                <form (ngSubmit)="onSaveChanges()" class="p-4">
+                    <div class="flex flex-column gap-2 mb-3">
+                        <label for="username">Username</label>
+                        <input pInputText id="username" [(ngModel)]="username" name="username" aria-describedby="username-help" />
+                    </div>
+                    <div class="flex flex-column gap-2 mb-3">
+                        <label for="email">Email</label>
+                        <input pInputText id="email" [(ngModel)]="email" name="email" aria-describedby="email-help" />
+                    </div>
+                    <div class="flex flex-column gap-2 mb-3">
+                        <label for="password">Password</label>
+                        <input pInputText id="password" [(ngModel)]="password" name="password" type="password" aria-describedby="password-help" />
+                    </div>
+                    <div class="flex flex-column gap-2 mb-3">
+                        <label for="conf_password">Confirmation Password</label>
+                        <input pInputText id="conf_password" [(ngModel)]="confirmPassword" name="confirmPassword" type="password" aria-describedby="conf_password-help" />
+                    </div>
+                    <button pButton type="submit" label="Save Changes" [outlined]="true" class="mb-3"></button>
+                    <button pButton type="button" label="Initialize" class="mb-3 mx-2 p-button-help" (click)="initializeForm()"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

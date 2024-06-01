@@ -1,0 +1,129 @@
+<div class="Container" >
+
+<div class="grid overflow-hidden justify-content-center"  *ngIf="numberOfCards < maxNumberOfCards" >
+    <div class="col-12 md:col-6 lg:col-3">
+        <div class="logo" [style.background-image]="'url(' + BC_FRONT_SIDE + ')'"
+            style="background-repeat: no-repeat; background-size: contain; background-position: center; height: 300px;">
+        </div>
+        <div class="w-full flex align-items-center justify-content-center">
+            <input #fileInputFront type="file" style="display: none" (change)="onFileChangeBCFrontSide($event)">
+            <button pButton pRipple label="Upload Front" icon="pi pi-upload" [outlined]="true" size="small"
+                (click)="fileInputFront.click()"></button>
+        </div>
+        
+
+    </div>
+    <div class="col-12 md:col-6 lg:col-3">
+        <div class="logo" [style.background-image]="'url(' + BC_BACK_SIDE + ')'"
+            style="background-repeat: no-repeat; background-size: contain; background-position: center; height: 300px;">
+        </div>
+        <div class="w-full flex align-items-center justify-content-center">
+            <input #fileInputback type="file" style="display: none" (change)="onFileChangeBCBackSide($event)">
+            <button pButton pRipple label="Upload Back" icon="pi pi-upload" [outlined]="true" size="small"
+                (click)="fileInputback.click()"></button>
+        </div>
+        
+
+    </div>
+
+    
+</div>
+<div class="col-12 flex align-items-center justify-content-evenly mt-7" *ngIf="numberOfCards < maxNumberOfCards">
+    <!-- <button pButton pRipple label="Save" icon="pi pi-user" class="p-button-primary px-4 py-3 text-xl" (click)="onSave()" ></button> -->
+    <p-button icon="pi pi-check" label="Save" [outlined]="true" severity="success" (click)="onSave()"></p-button>
+      
+</div>
+
+<div *ngIf="numberOfCards == maxNumberOfCards">
+    <div class="limit-alert bg-gradient-primary">
+        <div class="title text-light">Limit Alert</div>
+        <div class="message text-light">You have reached your limit for this feature.</div>
+      </div>                              
+</div>
+
+<div class="w-screen overflow-hidden mt-8" >
+    <div class="grid">
+        <div class="col-12 md:col-6 lg:col-3" *ngFor="let card of cards" >
+            <div style="height: 205px;" class="flip-card" [ngClass]="{'flipped': !card.isFrontVisible}" [@flipAnimation]="card.isFrontVisible ? 'front' : 'back'">
+              <div class="front-card-side text-center p-3 border-round-sm font-bold h-full">
+                <img width="100%" height="100%" style="object-fit: contain;" [src]="card?.frontImageUrl" />
+            </div>
+            <div class="back-card-side text-center p-3 border-round-sm font-bold h-full">
+                <img width="100%" height="100%" style="object-fit: contain;" [src]="card?.backImageUrl" />
+            </div>
+            
+            </div>
+            <div class="action_buttons text-center p-3 border-round-sm font-bold h-full">
+                <div class="grid flex align-items-center justify-content-center gap-3">
+                    
+                        <div class="flex align-items-center justify-content-center bg-blue-100 border-round" (click)="toggleCard(card)" style="width:2.5rem;height:2.5rem" [pTooltip]="'Flip Card'">
+                            <i class="pi pi-sync text-blue-500 text-xl"></i>
+                        </div>
+                        
+                        <div (click)="editCard(card)" class="flex align-items-center justify-content-center bg-yellow-100 border-round" style="width:2.5rem;height:2.5rem" [pTooltip]="'Edit Card'">
+                            <i class="pi pi-pencil text-yellow-500 text-xl"></i>
+                        </div>
+                        
+                        <div (click)="deleteBusinessCard(card)" class="flex align-items-center justify-content-center bg-red-100 border-round" style="width:2.5rem;height:2.5rem" [pTooltip]="'Delete Card'">
+                            <i class="pi pi-trash text-red-500 text-xl"></i>
+                        </div>
+                        
+                        <div (click)="changeCardStatus(card)" class="flex align-items-center justify-content-center border-round"
+                            [ngClass]="card?.IsActive == 0 ? 'bg-red-100' : 'bg-green-100'" style="width: 2.5rem; height: 2.5rem"
+                            [pTooltip]="card?.IsActive == 0 ? 'Activate Card' : 'Deactivate Card'">
+                            <i class="pi pi-power-off text-xl" [ngClass]="card?.IsActive == 0 ? 'text-red-500' : 'text-green-500'"></i>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+          
+        
+    </div>
+     
+</div>
+
+  
+
+
+
+
+
+
+
+
+<p-dialog header="Edit Business Card" [modal]="true" [(visible)]="showEditModal" [style]="{ width: '100%' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [maximizable]="true">
+    <div class="grid overflow-hidden justify-content-center">
+        <div class="col-12 md:col-6 lg:col-3">
+            <div class="logo" [style.background-image]="'url(' + BC_FRONT_SIDE_EDIT_MODE + ')'"
+                style="background-repeat: no-repeat; background-size: contain; background-position: center; height: 300px;">
+            </div>
+            <div class="w-full flex align-items-center justify-content-center">
+                <input #fileInputFrontEditMode type="file" style="display: none" (change)="onFileChangeBCFrontSideEditMode($event)">
+                <button pButton pRipple label="Upload Front" icon="pi pi-upload" [outlined]="true" size="small"
+                    (click)="fileInputFrontEditMode.click()"></button>
+            </div>
+            
+    
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <div class="logo" [style.background-image]="'url(' + BC_BACK_SIDE_EDIT_MODE + ')'"
+                style="background-repeat: no-repeat; background-size: contain; background-position: center; height: 300px;">
+            </div>
+            <div class="w-full flex align-items-center justify-content-center">
+                <input #fileInputbackEditMode type="file" style="display: none" (change)="onFileChangeBCBackSideEditMode($event)">
+                <button pButton pRipple label="Upload Back" icon="pi pi-upload" [outlined]="true" size="small"
+                    (click)="fileInputbackEditMode.click()"></button>
+            </div>
+            
+    
+        </div>
+    
+        
+    </div>
+    <div class="col-12 flex align-items-center justify-content-center mt-7">
+        <button pButton pRipple label="Save" icon="pi pi-user" class="p-button-primary px-4 py-3 text-xl" (click)="onEditSave()" ></button>
+    </div>
+</p-dialog>
+
+</div>

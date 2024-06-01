@@ -1,0 +1,50 @@
+<div class="my-container">
+
+<div class="bg-bluegray-900 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap">
+    <div class="font-bold mr-8">🔥 Ready to Take Control?</div>
+    <div class="align-items-center hidden lg:flex">
+        <span class="line-height-3">Are you tired of limitations holding you back? Ready to unlock untapped potential?</span>
+    </div>
+    <a class="flex align-items-center ml-2 mr-8">
+        <a class="text-white" href="#"><span class="underline font-bold">Discover What's Possible</span></a>
+    </a>
+    <a pRipple class="flex align-items-center no-underline justify-content-center border-circle text-gray-50 hover:bg-bluegray-700 cursor-pointer transition-colors transition-duration-150" style="width:2rem; height: 2rem">
+        <!-- <i class="pi pi-times"></i> -->
+    </a>
+</div>
+
+
+
+<app-toolbar></app-toolbar>
+<!-- {{ companyUUID }} -->
+<div class="surface-ground px-4" *ngIf="companyUUID != null" >
+
+    <div class="grid">
+        
+        <div class="col-12 md:col-6 lg:col-3">
+        
+            <div class="border-round">
+                <div class="flex justify-content-between items-center mb-3">
+                    <!-- Profile Image -->
+                    <div class="profile-image surface-200 border-round flex align-items-center justify-content-center"  style="width:5.5rem;height:5.5rem">
+                        <!-- <i class="pi pi-shopping-cart text-blue-500 text-xl"></i> -->
+                        <img [src]="companyImage" style="width: 5rem; object-fit: contain;" />
+                    </div>
+                    
+                    <!-- Profile Name -->
+                    <div class="profile-info flex-grow-1 ml-3">
+                        <!-- Add ellipsis for long names -->
+                        <span class="block text-sm text-gray-900 truncate">{{ companyName }}</span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+
+</div>
+
+<router-outlet></router-outlet>
+
+</div>

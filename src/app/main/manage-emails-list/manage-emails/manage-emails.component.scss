@@ -1,0 +1,240 @@
+::ng-deep .p-dialog .p-dialog-header {
+    background: #6b7280;
+    color: #ffffff;
+}
+
+
+::ng-deep .p-dialog .p-dialog-content {
+    background: #ffffff;
+    color: #6b7280;
+}
+
+::ng-deep .p-dialog .p-dialog-header .p-dialog-header-icon {
+    color: #ffffff;
+    background-color: #000000;
+}
+
+::ng-deep .p-dialog .p-dialog-header .p-dialog-header-icon:hover {
+    color: #6b7280;
+    background-color: #ffffff;
+}
+
+::ng-deep .p-dialog .p-dialog-footer {
+    border-bottom: 0 none;
+    background: #6b7280;
+    color: #ffffff;
+    padding: 0 !important;
+}
+
+
+.swal2-container {
+    z-index: 9999999 !important;
+}
+
+/* .bg-white */
+.bg-white {
+    background-color: #ffffff;
+  }
+  
+  /* .text-gray-500 */
+  .text-gray-500 {
+    color: #718096;
+  }
+  
+  /* .font-semibold */
+  .font-semibold {
+    font-weight: 600;
+  }
+  
+  /* .text-base */
+  .text-base {
+    font-size: 1rem;
+  }
+  
+  /* .rounded */
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  
+  /* .max-w-md */
+  .max-w-md {
+    max-width: 28rem; /* Assuming 1rem = 16px */
+  }
+  
+  /* .h-52 */
+  .h-52 {
+    height: 13rem; /* Assuming 1rem = 16px */
+  }
+  
+  /* .flex */
+  .flex {
+    display: flex;
+  }
+  
+  /* .flex-col */
+  .flex-col {
+    flex-direction: column;
+  }
+  
+  /* .items-center */
+  .items-center {
+    align-items: center;
+  }
+  
+  /* .justify-center */
+  .justify-center {
+    justify-content: center;
+  }
+  
+  /* .cursor-pointer */
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  
+  /* .border-2 */
+  .border-2 {
+    border-width: 2px;
+  }
+  
+  /* .border-gray-300 */
+  .border-gray-300 {
+    border-color: #e2e8f0;
+  }
+  
+  /* .border-dashed */
+  .border-dashed {
+    border-style: dashed;
+  }
+  
+  /* .mx-auto */
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* .font-[sans-serif] */
+  .font-[sans-serif] {
+    font-family: sans-serif;
+  }
+  
+  /* .w-11 */
+  .w-11 {
+    width: 2.75rem; /* Assuming 1rem = 16px */
+  }
+  
+  /* .mb-2 */
+  .mb-2 {
+    margin-bottom: 0.5rem; /* Assuming 1rem = 16px */
+  }
+  
+  /* .fill-gray-500 */
+  .fill-gray-500 {
+    fill: #718096;
+  }
+  
+  /* .text-xs */
+  .text-xs {
+    font-size: 0.75rem; /* Assuming 1rem = 16px */
+  }
+  
+  /* .font-medium */
+  .font-medium {
+    font-weight: 500;
+  }
+  
+  /* .mt-2 */
+  .mt-2 {
+    margin-top: 0.5rem; /* Assuming 1rem = 16px */
+  }
+  
+  /* .hidden */
+  .hidden {
+    display: none;
+  }
+  
+  /* .text-gray-400 */
+  .text-gray-400 {
+    color: #a0aec0;
+  }
+  
+
+  /* red background at the number*/
+.pagination-spreads::ng-deep li {
+    --tw-text-opacity: 1;
+    color: rgb(31 41 55 / var(--tw-text-opacity));
+    color: #FFFFFF;
+}
+  
+  /* I hide the previus when I am at number 1. with ::before */
+  .pagination-spreads::ng-deep ul > li.disabled {
+    display: none !important;
+  }
+  
+  /* deactivated numbers will be grayed out */
+  .pagination-spreads::ng-deep ul > li:not(.current) > a {
+    // background-color: #FFFFFF !important;
+    color: rgb(31, 41, 55) !important;
+  }
+
+  .pagination-spreads::ng-deep ul > li > a {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+    border-radius: 0.5rem !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    // font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  ::ng-deep .ngx-pagination .current {
+    border-color: #EEEEEE;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.03), 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 2px 6px rgba(0, 0, 0, 0.12) !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+    border-radius: 0.5rem !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    // font-size: 0.875rem;
+    line-height: 1.25rem;
+    background-color: #3C424D !important;
+    color: #FFFFFF !important;
+    border-bottom-color: rgb(229, 231, 235);
+    border-left-color: rgb(229, 231, 235);
+    border-right-color: rgb(229, 231, 235);
+    border-top-color: rgb(229, 231, 235);
+  }
+
+
+  .limit-alert {
+    padding: 1.5rem;
+    max-width: 90%;
+    margin: auto;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+  }
+  
+  .limit-alert:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.2);
+  }
+  
+  .limit-alert .title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .limit-alert .message {
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 1.5;
+  }

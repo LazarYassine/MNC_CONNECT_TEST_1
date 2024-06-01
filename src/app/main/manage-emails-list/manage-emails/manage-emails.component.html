@@ -1,0 +1,209 @@
+<div *ngIf="numberOfEmails == maxNumberOfEmails">
+    <div class="limit-alert bg-gradient-primary">
+        <div class="title text-light">Limit Alert</div>
+        <div class="message text-light">You have reached your limit for this feature.</div>
+      </div>                              
+</div>
+
+<div class="formgrid grid p-4">
+    <div class="field col-12 md:col-4">
+        <label for="contactEmail">Email</label>
+        <input [(ngModel)]="criteria.searchTerm" id="contactEmail" type="email" pInputText class="w-full" name="contactEmail">
+    </div>
+    <div class="field col-12 md:col-4">
+        <label for="contactCategory">Category</label>
+        <p-dropdown
+            [showClear]="true"
+            [(ngModel)]="selectedSearchCategory"
+            appendTo="body"
+            [style]="{'minWidth':'100%'}"
+            id="contactCategory"
+            [options]="categories"
+            [filter]="true"
+            optionLabel="category_name"
+            placeholder="Select Category"
+            class="w-full"
+            name="selectedCategory">
+        </p-dropdown>
+    </div>
+    
+    <div class="field col-12 md:col-4 flex flex-column align-items-start justify-content-between">
+        <label for="contactCategory">Important</label>
+        <p-checkbox [style]="{'minWidth':'100%'}" 
+        [(ngModel)]="isSearchImportant"
+        [binary]="true" 
+        variant="filled"
+        />
+    </div>
+
+    <div class="formgrid grid col-12">
+        <div class="field col-12 md:col-2">
+            <p-button (click)="filterEmails()" styleClass="p-button-primary" label="Search" icon="pi pi-search" [style]="{'minWidth':'100%'}"></p-button>
+        </div>
+    
+        <div class="field col-12 md:col-2">
+            <p-button (click)="initialize()" styleClass="p-button-help" label="Initialize" icon="pi pi-refresh" [style]="{'minWidth':'100%'}"></p-button>
+        </div>
+
+        <div class="field col-12 md:col-2" *ngIf="numberOfEmails < maxNumberOfEmails" >
+            <p-button (click)="showDialog()" styleClass="p-button-success" label="Add" icon="pi pi-plus" [style]="{'minWidth':'100%'}"></p-button>
+        </div>
+        <div class="field col-12 md:col-2" *ngIf="numberOfEmails < maxNumberOfEmails" >
+            <p-button 
+                styleClass="bg-green-700"
+                (click)="exportCanvas()" 
+                label="Get Excel Template" 
+                icon="pi pi-file-excel" 
+                [style]="{'minWidth':'100%', 'background-color': '#F2F2F2'}">
+            </p-button>
+        </div>
+
+        
+        <div class="field col-12 md:col-2" *ngIf="numberOfEmails < maxNumberOfEmails" >
+            <p-button 
+                styleClass="bg-green-700"
+                (click)="showUploadDiloag()" 
+                label="Upload Emails" 
+                icon="pi pi-file-excel" 
+                [style]="{'minWidth':'100%', 'background-color': '#F2F2F2'}">
+            </p-button>
+        </div>
+
+        <div class="field col-12 md:col-2" *ngIf="numberOfEmails < maxNumberOfEmails" >
+            <p-button 
+                styleClass="bg-green-700"
+                (click)="exportEmailList()" 
+                label="Export Emails" 
+                icon="pi pi-file-excel" 
+                [style]="{'minWidth':'100%', 'background-color': '#F2F2F2'}">
+            </p-button>
+        </div>
+
+    </div>
+    
+</div>
+
+
+<div class="grid mx-3">
+    <div class="col-12 md:col-6 lg:col-3" *ngFor="let item of emails | paginate: { id: 'server', itemsPerPage: 10, currentPage: currentPage, totalItems: total }">
+        <div class="text-center p-3 border-round-sm surface-card shadow-2 font-bold" style="border-left: 4px solid #347ab7">{{ item?.email_address }}</div>
+        <div class="flex justify-content-center gap-3 mb-3">
+            <div (click)="goEdit(item)" class="flex align-items-center justify-content-center bg-yellow-100 border-round mt-2" [pTooltip]="item.is_important ? 'Edit Important Company Infos' : 'Edit Company Infos'" style="width:2.5rem;height:2.5rem; cursor: pointer;">
+                <i class="pi pi-pencil text-yellow-500 text-xl"></i>
+            </div>
+            <div (click)="deleteEmail(item?.email_id)" class="flex align-items-center justify-content-center bg-red-100 border-round mt-2" [pTooltip]="item.is_important ? 'Delete Important Company' : 'Delete the company'" style="width:2.5rem;height:2.5rem; cursor: pointer;">
+                <i class="pi pi-trash text-red-500 text-xl"></i>
+            </div>
+            <div class="flex align-items-center justify-content-center bg-gray-50 border-round mt-2" [pTooltip]="item.is_important ? 'Important Email' : 'Normal Email'" style="width:2.5rem;height:2.5rem; cursor: pointer;">
+                <i [class]="item.is_important ? 'pi pi-star-fill text-yellow-500 text-xl' : 'pi pi-star text-yellow-500 text-xl'"></i>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<div class="grid mx-3" >
+    <div class="col-12 text-center">
+        <!-- <pagination-controls [id]="'advanced'" [maxSize]="maxSize" [directionLinks]="directionLinks" [autoHide]="autoHide"
+            [responsive]="responsive" [previousLabel]="labels.previousLabel" [nextLabel]="labels.nextLabel"
+            [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+            [screenReaderPageLabel]="labels.screenReaderPageLabel" [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+            (pageChange)="onPageChange($event)" >
+        </pagination-controls> -->
+        <pagination-controls class="pagination-spreads" [previousLabel]="labels.previousLabel" [nextLabel]="labels.nextLabel" (pageChange)="onPageChange($event)" id="server"></pagination-controls>
+
+
+
+    </div>
+</div>
+
+<p-dialog header="Manage Emails" [(visible)]="isDialogVisible" [maximizable]="true" [breakpoints]="{ '960px': '90vw' }" [modal]="true" [style]="{ width: '80vw' }" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="header">
+        <span class="text-xl font-bold">Manage Emails</span>
+    </ng-template>
+    
+    <ng-template pTemplate="content">
+        <div class="formgrid grid p-4">
+            <div class="field col-12 md:col-4">
+                <label for="contactEmail">Email</label>
+                <input id="contactEmail" [(ngModel)]="emailAddress" type="email" pInputText class="w-full" name="contactEmail">
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="contactCategory">Category</label>
+                <p-dropdown appendTo="body" [(ngModel)]="selectedCategory" [style]="{'minWidth':'100%'}" id="contactCategory" [options]="categories" [filter]="true" optionLabel="category_name" placeholder="Select Category" class="w-full" name="selectedCategory"></p-dropdown>
+            </div>
+            
+            <div class="field col-12 md:col-4 flex flex-column align-items-start justify-content-between">
+                <label for="contactCategory">Important</label>
+                <p-checkbox [style]="{'minWidth':'100%'}" 
+                [(ngModel)]="isImportantEmail"
+                [binary]="true" 
+                variant="filled"
+                />
+            </div>
+        
+            
+        </div>
+        
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <div class="formgrid grid p-4">
+            <div class="field col-12 md:col-2">
+                <p-button (click)="save()" styleClass="p-button-primary" label="Save" icon="pi pi-check" [style]="{'minWidth':'100%'}" ></p-button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+<p-dialog header="Upload Emails" [(visible)]="isUploadDialogVisible" [maximizable]="true" [breakpoints]="{ '960px': '90vw' }" [modal]="true" [style]="{ width: '80vw' }" [draggable]="false" [resizable]="false">
+    <div class="formgrid grid p-4">
+    
+        <div class="field col-12 md:col-6">
+            <label for="contactCategory">Category</label>
+            <p-dropdown appendTo="body" [(ngModel)]="selectedUploadCategory" [style]="{'minWidth':'100%'}" id="contactCategory" [options]="categories" [filter]="true" optionLabel="category_name" placeholder="Select Category" class="w-full" name="selectedCategory"></p-dropdown>
+        </div>
+        
+        <div class="field col-12 md:col-6 flex flex-column align-items-start justify-content-between">
+            <label for="contactCategory">Important</label>
+            <p-checkbox [style]="{'minWidth':'100%'}" 
+            [(ngModel)]="isImportantUploadEmail"
+            [binary]="true" 
+            variant="filled"
+            />
+        </div>
+
+    </div>
+
+    <div class="formgrid grid p-4">
+    
+        <div class="field col-12">
+            
+            <label for="uploadFile1" *ngIf="selectedUploadCategory"
+      class="bg-white text-gray-500 font-semibold text-base rounded max-w-md h-52 flex flex-col items-center justify-center cursor-pointer border-2 border-gray-300 border-dashed mx-auto font-[sans-serif]">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-11 mb-2 fill-gray-500" viewBox="0 0 32 32">
+        <path
+          d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z"
+          data-original="#000000" />
+        <path
+          d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
+          data-original="#000000" />
+      </svg>
+      {{file_name}}
+
+      <input id="uploadFile1"  type="file" class="hidden" (change)="onFileChange($event)" accept=".csv,.xlsx" />
+
+      <p class="text-xs font-medium text-gray-400 mt-2">PNG, JPG SVG, WEBP, and GIF are Allowed.</p>
+    </label>
+
+              
+            <p-messages></p-messages>
+        </div>
+
+        <div class="field col-12">
+            <p-button (click)="insertEmails()" styleClass="p-button-primary" label="Add Emails" icon="pi pi-plus" [style]="{'minWidth':'100%'}"></p-button>
+        </div>
+    </div>
+
+</p-dialog>

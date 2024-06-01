@@ -1,0 +1,15 @@
+.show_menu {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 999 !important;
+}
+
+a {
+    text-decoration: none;
+}
+
+.active-link {
+    background-color: var(--surface-100) !important;
+    color: var(--primary-color) !important;
+}

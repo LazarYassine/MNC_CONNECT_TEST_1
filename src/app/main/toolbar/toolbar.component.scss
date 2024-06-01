@@ -1,0 +1,92 @@
+:host ::ng-deep {
+    .pi-showcase{
+      width: 2.5rem;
+      height: 2.5rem;
+      background-image: url("https://img.icons8.com/?size=256&id=IHAjyE3EH1BW&format=png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .pi-custom-home {
+      width: 2.5rem;
+      height: 2.5rem;
+      background-image: url("https://img.icons8.com/?size=256&id=okHTZ6vxDC3Y&format=png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .pi-network{
+      width: 2.5rem;
+      height: 2.5rem;
+      background-image: url("https://img.icons8.com/?size=256&id=LzlUVlq0ws3E&format=png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .pi-business-card{
+      width: 2.5rem;
+      height: 2.5rem;
+      background-image: url("https://img.icons8.com/?size=256&id=rR3ieEpXmKay&format=png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .pi-social-media-accounts {
+      width: 2.5rem;
+      height: 2.5rem;
+      background-image: url("https://img.icons8.com/?size=256&id=PzXKVjNcDURH&format=png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .pi-categories {
+      width: 2.5rem;
+      height: 2.5rem;
+      background-image: url("https://img.icons8.com/?size=256&id=vxOr7mumH0q9&format=png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
+    .pi-emails {
+      width: 2.5rem;
+      height: 2.5rem;
+      background-image: url("https://img.icons8.com/?size=256&id=vtVx10R1DqZZ&format=png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .pi-manage-emails {
+      width: 2.5rem;
+      height: 2.5rem;
+      background-image: url("https://img.icons8.com/?size=256&id=kMNXvzAiDvzO&format=png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .p-submenu-list {
+      width: 300px;
+    }
+
+    .p-menubar {
+      background-color: #FBFEFC !important;
+    }
+
+  }
+
+.profile_menu_item {
+  padding: 10px;
+  background: #3C424D !important;
+  color: #FFFFFF !important;
+  border: 1px #3C424D solid;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+
+.profile_menu_item:hover {
+  color: #3C424D !important;
+  background-color: #FBFEFC !important;
+}
